@@ -1,0 +1,42 @@
+
+def javaVersion = 1.7
+
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+
+  dependencies {
+    classpath('org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE')
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+jar {
+  baseName = 'gs-spring-boot'
+  version = '0.1.0'
+}
+
+repositories {
+  mavenCentral()
+}
+
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+
+dependencies {
+  // jetty
+  compile('org.springframework.boot:spring-boot-starter-web') {
+    exclude module: 'spring-boot-starter-tomcat'
+  }
+
+  compile('org.springframework.boot:spring-boot-starter-jetty')
+
+  // actuator
+  compile('org.springframework.boot:spring-boot-starter-actuator')
+
+  // junit tests
+  testCompile('junit:junit')
+}
